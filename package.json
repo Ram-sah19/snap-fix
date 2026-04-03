@@ -1,0 +1,47 @@
+{
+  "name": "@ram-sah19/snap-fix",
+  "version": "1.0.0",
+  "description": "Production-ready code review and auto-fix tool for Node.js projects.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "snap-fix": "./index.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.js",
+    "lib/",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [
+    "cli",
+    "production",
+    "code-review",
+    "fixer",
+    "automation"
+  ],
+  "author": "Rambilas <ram6070246@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ram-sah19/snap-fix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ram-sah19/snap-fix/issues"
+  },
+  "homepage": "https://github.com/Ram-sah19/snap-fix#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^10.0.0",
+    "fast-glob": "^3.3.3",
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.2"
+  }
+}
