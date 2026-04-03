@@ -1,2 +1,5 @@
+# Exclude local test and config files
+buggy.js
+test.js
+.profixrc
 node_modules/
-.env
