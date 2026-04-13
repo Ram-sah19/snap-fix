@@ -1,0 +1,10 @@
+{
+  "ignoreFiles": [
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "*.min.js",
+    "legacy/**"
+  ],
+  "disabledRules": []
+}

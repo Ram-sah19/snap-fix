@@ -16,7 +16,10 @@
     "README.md"
   ],
   "scripts": {
-    "test": "vitest"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
   },
   "keywords": [
     "cli",
@@ -42,6 +45,7 @@
     "inquirer": "^8.2.4"
   },
   "devDependencies": {
+    "eslint": "^8.57.0",
     "vitest": "^4.1.2"
   }
 }

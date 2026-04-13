@@ -71,6 +71,48 @@ Snap-Fix uses a customizable rules engine located in `lib/rules.js`. Current rul
 | `localhost-check` | Localhost Detector | Hardcoded `http://localhost` | Replace with `process.env.API_URL` |
 | `secret-sentry` | Secret Sentry | Hardcoded strings like `sk-...` | Move to a `.env` file |
 | `async-guard` | Async Guard | `await` outside of `try { ... }` | Wrap in a try/catch block |
+| `sql-injection` | SQL Injection Detector | String interpolation in SQL | Use parameterized queries |
+| `xss-detector` | XSS Detector | Direct `.innerHTML` assignments | Use `.textContent` or DOMPurify |
+
+### `.profixrc` Configuration File
+
+Create a `.profixrc` file in your project root to customize behavior. Copy `.profixrc.example` as a starting point:
+
+```json
+{
+  "ignoreFiles": [
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "*.min.js",
+    "legacy/**"
+  ],
+  "disabledRules": []
+}
+```
+
+| Option | Type | Description |
+| :--- | :--- | :--- |
+| `ignoreFiles` | `string[]` | Glob patterns for files to skip during scanning |
+| `disabledRules` | `string[]` | Rule IDs to disable (e.g. `"localhost-check"`) |
+
+---
+
+## 🧑‍💻 Development
+
+```bash
+# Run tests once
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Lint the codebase
+npm run lint
+
+# Auto-fix lint issues
+npm run lint:fix
+```
 
 ---
 
