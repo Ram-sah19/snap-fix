@@ -61,11 +61,8 @@ program
                 continue;
             }
 
-            totalIssuesCount += issues.length;
-            logger.warn(`Found ${issues.length} issue(s) in ${file}:\n`);
-
+            let totalFixed = 0;
             let updatedContent = content;
-            let shouldSave = false;
 
             for (const issue of issues) {
                 console.log(`${chalk.red('✖')} [Line ${issue.line}] ${issue.message}`);
@@ -88,17 +85,25 @@ program
                     }
 
                     if (apply) {
-                        updatedContent = updatedContent.replace(issue.match, issue.fix);
-                        shouldSave = true;
+                        // Replace ALL occurrences of the matched string with the fix
+                        updatedContent = updatedContent.split(issue.match).join(issue.fix);
+                        totalFixed++;
                         logger.success(`Fix applied for ${issue.ruleName}!`);
-                        totalIssuesCount--; // Reduction in active issues
                     }
                 }
             }
 
-            if (shouldSave) {
-                fs.writeFileSync(file, updatedContent);
-                logger.success(`Update saved to ${file}.`);
+            if (totalFixed > 0) {
+                try {
+                    fs.writeFileSync(file, updatedContent);
+                    logger.success(`Update saved to ${file}.`);
+                    totalIssuesCount += Math.max(0, issues.length - totalFixed);
+                } catch (error) {
+                    logger.error(`Failed to save changes to ${file}: ${error.message}`);
+                    totalIssuesCount += issues.length;
+                }
+            } else {
+                totalIssuesCount += issues.length;
             }
         }
 
