@@ -36,7 +36,7 @@ To install and link Snap-Fix locally for development:
    npm link
    ```
 
-Now you can run the `snap-fix` command from anywhere in your terminal!
+Now you can run the `snap-fix` command from anywhere in your terminal!..
 
 ---
 
