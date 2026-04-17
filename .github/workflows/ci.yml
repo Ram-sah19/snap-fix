@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # Node 24 (2026 default) and 18 (Active LTS)
-        node-version: [18.x, 24.x]
+        # Node 24 (Active LTS) and 22 (Maintenance LTS)
+        node-version: [22.x, 24.x]
 
     steps:
       - uses: actions/checkout@v5
