@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { getRules, checkFileWithRules } from '../lib/rules.js';
+import { getRules, checkFileWithRules } from '../lib/rules/index.js';
 
 describe('Snap-Fix Core Tests', () => {
 
