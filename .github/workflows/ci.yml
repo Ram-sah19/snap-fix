@@ -16,7 +16,8 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     strategy:
       matrix:
-        node-version: [18.x, 22.x, 24.x]
+        # Vitest 4.x requires Node >=20 — Node 18 is NOT supported
+        node-version: [20.x, 22.x, 24.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -25,10 +26,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          # Cache disabled temporarily to force a clean install and bust bad Rolldown binaries
+          # cache: 'npm'
 
       - name: Install dependencies
-        run: npm install # Use install if package-lock.json is missing
+        # --include=optional ensures Linux native bindings for Rolldown/Vitest are downloaded
+        run: npm install --include=optional
 
       - name: Lint
         run: npm run lint
