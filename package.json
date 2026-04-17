@@ -1,14 +1,14 @@
 {
   "name": "snap-fix",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Production-ready code review and auto-fix tool for Node.js projects.",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "snap-fix": "./index.js"
+    "snap-fix": "index.js"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "files": [
     "index.js",
