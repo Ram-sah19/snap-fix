@@ -1,6 +1,6 @@
 {
   "name": "snap-fix",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Production-ready code review and auto-fix tool for Node.js projects.",
   "main": "index.js",
   "type": "module",

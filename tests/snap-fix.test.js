@@ -16,12 +16,13 @@ describe('Snap-Fix Core Tests', () => {
 
   test('checkFileWithRules should aggregate issues across all rules', () => {
     const rules = getRules();
+    // Use a genuinely high-entropy key (not all-zeros) so SecretSentryRule flags it
     const code = `
-      const apiKey = "sk-000000000000000000000000";
+      const apiKey = "xK9mP2qL8vN4wJ7rT3sY6uC1eA5bD0fH";
       const apiUrl = "http://localhost:3000";
     `;
     const issues = checkFileWithRules(code, rules);
-    
+
     expect(issues.length).toBe(2);
     expect(issues.some(i => i.ruleId === 'secret-sentry')).toBe(true);
     expect(issues.some(i => i.ruleId === 'localhost-check')).toBe(true);

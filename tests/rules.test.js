@@ -13,14 +13,26 @@ describe('ProFix Rule Logic', () => {
     expect(issues[0].fix).toContain('process.env.API_URL');
   });
 
-  test('SecretSentryRule should detect OpenAI-like API keys', () => {
+  test('SecretSentryRule should detect any high-entropy secret via entropy + name heuristic', () => {
     const rule = new SecretSentryRule();
-    const code = 'const key = "sk-abcdef1234567890abcdef12345678"';
+    // Uses a generic random-looking key NOT branded as OpenAI — proving brand-agnostic detection
+    const code = 'const apiKey = "xK9mP2qL8vN4wJ7rT3sY6uC1eA5bD0fH"';
     const issues = rule.check(code);
-    
+
     expect(issues.length).toBe(1);
     expect(issues[0].ruleId).toBe('secret-sentry');
-    expect(issues[0].fix).toBe('process.env.KEY');
+    expect(issues[0].fix).toContain('process.env.APIKEY');
+    expect(issues[0].isSecret).toBe(true);
+    expect(issues[0].envKey).toBe('APIKEY');
+    expect(issues[0].secretValue).toBe('xK9mP2qL8vN4wJ7rT3sY6uC1eA5bD0fH');
+  });
+
+  test('SecretSentryRule should NOT flag low-entropy plain strings', () => {
+    const rule = new SecretSentryRule();
+    // "helloworld" is low entropy and not a real secret
+    const code = 'const apiKey = "helloworldhello"';
+    const issues = rule.check(code);
+    expect(issues.length).toBe(0);
   });
 
   test('AsyncGuardRule should detect await calls outside try/catch', () => {
